@@ -41,8 +41,7 @@ class LegitGroup(click.Group):
 
     def get_command(self, ctx, cmd_name):
         """Override to handle command aliases"""
-        rv = click.Group.get_command(self, ctx, cmd_name)
-        if rv is not None:
+        if (rv := click.Group.get_command(self, ctx, cmd_name)) is not None:
             return rv
         cmd_name = self.command_aliases.get(cmd_name, "")
         return click.Group.get_command(self, ctx, cmd_name)

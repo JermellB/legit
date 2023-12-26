@@ -9,9 +9,8 @@ def status_log(func, message, *args, **kwargs):
     """Emits header message, executes a callable, and echoes the return strings."""
 
     click.echo(message)
-    log = func(*args, **kwargs)
 
-    if log:
+    if log := func(*args, **kwargs):
         out = []
 
         for line in log.split('\n'):
@@ -22,9 +21,8 @@ def status_log(func, message, *args, **kwargs):
 
 def verbose_echo(str, verbose=False, fake=False):
     """Selectively output ``str``, with special formatting if ``fake`` is True"""
-    verbose = fake or verbose
 
-    if verbose:
+    if verbose := fake or verbose:
         color = crayons.green
         prefix = ''
         if fake:
